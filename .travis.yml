@@ -1,0 +1,20 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.0.0
+script: bundle exec rspec spec
+notifications:
+  email:
+    recipients:
+      - wayne@wego.com
+      - son@wego.com
+      - tien@wego.com
+      - kates@wego.com
+      - yeouchien@wego.com
+      - khayuen@wego.com
+    on_success: change
+    on_failure: always
+  hipchat:
+    rooms:
+      - 755eb98922c4a3b983b56718f14648@Geeks
+      - 755eb98922c4a3b983b56718f14648@Pedobears
