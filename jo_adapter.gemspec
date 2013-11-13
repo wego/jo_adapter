@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors       = ["Geeks at Wego"]
   s.email         = ["therealgeeks@wego.com"]
   s.homepage      = "http://www.wego.com"
-  s.summary       = "Wego Hotels Elasticsearch Client"
-  s.description   = "Shared hotels elasticsearch client"
+  s.summary       = "Adapter for the jo gem"
+  s.description   = "Adapter for the jo gem"
   s.required_ruby_version = '>= 2.0.0'
 
   s.files         = `git ls-files`.split($/)
