@@ -22,6 +22,54 @@ describe JoAdapter do
     end
   end
 
+  describe '.jo_writable' do
+    subject(:instance) do
+      klass.instance_eval { jo_writable :details, :detail_name, :detail_address }
+      klass.new
+    end
+
+    context 'Given non-nil value to write' do
+      before do
+        subject.details_write = {
+          "detail_name" => "name", 
+          "detail_address" => "address",
+          "unused_attribute" => "unused"
+        }
+      end
+      describe 'accepts and writes the accepted attributes' do
+        its(:details) do
+          should eq({
+            'detail_name' => 'name',
+            'detail_address' => 'address'
+          }.to_json)
+        end
+      end
+      describe 'write automatically creates _json method' do
+        its(:details_json) do
+          should eq({
+            'detail_name' => 'name',
+            'detail_address' => 'address'
+          })
+        end
+      end
+    end
+
+    context 'Given nil value' do
+      before do
+        subject.details_write = nil
+      end
+      describe 'json method should retain the old value' do
+        its(:details_json) do
+          should eq({
+            'detail_name' => 'test',
+            'detail_address' => 'test address'
+          })
+        end
+      end
+    end
+
+  end
+
   describe '.jo' do
     subject(:instance) do
       klass.instance_eval { jo :name }

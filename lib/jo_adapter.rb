@@ -60,6 +60,18 @@ module JoAdapter
         end
       end
 
+      def self.jo_writable(write_col, *attributes)
+        class_eval <<-STR, __FILE__, __LINE__ + 1
+            jo :#{write_col}
+            def #{write_col}_write=(val)
+              return if val.nil? || !val.is_a?(Hash)
+              val.slice!(*#{attributes.map(&:to_s)})
+              self.#{write_col} = val.to_json
+              val
+            end
+        STR
+      end
+
       def self.jo_delegate(delg_col, *attributes)
         class_eval "jo :#{delg_col}", __FILE__, __LINE__ + 1
 
