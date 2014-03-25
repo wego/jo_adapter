@@ -65,8 +65,8 @@ module JoAdapter
             jo :#{write_col}
             def #{write_col}_write=(val)
               return if val.nil? || !val.is_a?(Hash)
-              val.slice!(*#{attributes.map(&:to_s)})
-              self.#{write_col} = val.to_json
+              filtered_val = val.slice(*#{attributes.map(&:to_s)})
+              self.#{write_col} = filtered_val.to_json
               val
             end
         STR
