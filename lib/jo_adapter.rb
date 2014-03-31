@@ -19,7 +19,7 @@ module JoAdapter
           class_eval <<-STR, __FILE__, __LINE__ + 1
             jo_i18n :#{attr}
             def #{attr}_i18n=(val)
-              return if val.nil?
+              return if val.blank?
 
               #{attr}_json_var = self.#{attr}_json.blank? ? {} : self.#{attr}_json
 
