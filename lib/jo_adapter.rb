@@ -70,10 +70,10 @@ module JoAdapter
             end
 
             def #{attr}=(val)
-              return if val.blank?
-
               #{delg_col}_json_var = self.#{delg_col}_json.blank? ? {} : self.#{delg_col}_json
-              if val != #{delg_col}_json_var["#{attr}"]
+              if val.blank?
+                #{delg_col}_json_var.except!("#{attr}")
+              elsif val != #{delg_col}_json_var["#{attr}"]
                 #{delg_col}_json_var["#{attr}"] = val
                 self.#{delg_col} = #{delg_col}_json_var.to_json
               end
