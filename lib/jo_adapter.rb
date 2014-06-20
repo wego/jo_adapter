@@ -75,8 +75,8 @@ module JoAdapter
                 #{delg_col}_json_var.except!("#{attr}")
               elsif val != #{delg_col}_json_var["#{attr}"]
                 #{delg_col}_json_var["#{attr}"] = val
-                self.#{delg_col} = #{delg_col}_json_var.to_json
               end
+              self.#{delg_col} = #{delg_col}_json_var.to_json
 
               val
             end
