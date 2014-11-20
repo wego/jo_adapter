@@ -76,7 +76,7 @@ module JoAdapter
         attributes.each do |attr|
           class_eval <<-STR, __FILE__, __LINE__ + 1
             def #{attr}_json
-              @_#{attr}_json ||= (#{attr}.is_a?(Hash)) ? #{attr} : JSON.parse(#{attr}) unless #{attr}.blank?
+              @_#{attr}_json ||= #{attr}.blank? ? {} : (#{attr}.is_a?(Hash)) ? #{attr} : JSON.parse(#{attr})
             end
           STR
         end
