@@ -68,18 +68,6 @@ module JoAdapter
             def #{attr}
               @#{attr}_cache ||= #{delg_col}_json['#{attr}'] unless #{delg_col}_json.blank?
             end
-
-            def #{attr}=(val)
-              #{delg_col}_json_var = self.#{delg_col}_json.blank? ? {} : self.#{delg_col}_json
-              if val.blank?
-                #{delg_col}_json_var.except!("#{attr}")
-              elsif val != #{delg_col}_json_var["#{attr}"]
-                #{delg_col}_json_var["#{attr}"] = val
-              end
-              self.#{delg_col} = #{delg_col}_json_var.to_json
-
-              val
-            end
           STR
         end
       end
